@@ -19,14 +19,14 @@ while True:
     message=message.split(' ')
     response=""  
     if (message[0]=="IP"):
-        print(" #Kodi per IP ")
+        response = "IP adressa eshte: "+addr[0]    
     if (message[0]=="PORT"):
-        print(" #Kodi per... ")    
-    #. qitu i shton tjerat
-
-    #.
-
-    #. 
+        response= "PORT-i i perdorur: "+str(addr[1])    
+    if (message[0]=="PRINTO"):
+        response = message        
+        response.remove("PRINTO")
+        response = ' '.join(response)
+        print (response)
     if(message[0]=="ZANORE"):
         zanoret="AEIOUYaeiouy"
         nrZan=0
