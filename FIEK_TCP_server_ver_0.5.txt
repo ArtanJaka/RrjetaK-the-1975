@@ -17,7 +17,15 @@ while True:
     print ("Request:"+message)
     message=message.split(' ')
     response=""  
-    
+    if (message[0]=="IP"):
+        response = "IP adressa eshte: "+addr[0]    
+    if (message[0]=="PORT"):
+        response= "PORT-i i perdorur: "+str(addr[1])    
+    if (message[0]=="PRINTO"):
+        response = message        
+        response.remove("PRINTO")
+        response = ' '.join(response)
+        print (response)
     if (message[0]=="TIME"):
         now=datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S %p")
         response="Koha ne kompjuterin e serverit eshte:"+str(now)
