@@ -54,6 +54,18 @@ def printo(ClientSocket):
     except:
         print ("Error: Serveri nuk ka kthyer pergjigje")
     menu(ClientSocket)
+
+def host(ClientSocket):
+    message = "HOST "
+    message = message.encode("UTF-8")
+    dergo(ClientSocket,message) 
+    try:
+        response = ClientSocket.recv(1024)
+        response = response.decode("UTF-8")
+        print (response)
+    except:
+        print ("Error: Serveri nuk ka kthyer pergjigje")
+    menu(ClientSocket)
     
 def time(ClientSocket):
     message = "TIME "
@@ -90,7 +102,46 @@ def faktoriel(ClientSocket):
     except:
         print ("Error: Serveri nuk ka kthyer pergjigje")
     menu(ClientSocket)
-
+    
+def konverto(ClientSocket):
+    message = "KONVERTO "
+    print("\n----------------------")
+    print("1.Celcius To Kelvin")
+    print("2.Celsius To Fahrenheit")
+    print("3.Kelvin To Fahrenheit")
+    print("4.Kelvin To Celsius")
+    print("5.Fahrenheit To Celsius")
+    print("6.Fahrenheit To Kelvin")
+    print("7.Pound To Kilogram")
+    print("8.Kilogram To Pound")
+    option = str(input("Zgjedh opsionin: "))
+    if(option=="1"):  
+        message = message+"CelciusToKelvin "
+    if(option=="2"):
+        message = message+"CelsiusToFahrenheit "
+    if(option=="3"):
+        message = message+"KelvinToFahrenheit "
+    if(option=="4"):
+        message = message+"KelvinToCelsius "
+    if(option=="5"):
+        message = message+"FahrenheitToCelsius "
+    if(option=="6"):
+        message = message+"FahrenheitToKelvin "
+    if(option=="7"):
+        message = message+"PoundToKilogram " 
+    if(option=="8"):
+        message = message+"KilogramToPound "
+    message = message+input("Sasia: ")
+    message = message.encode("UTF-8")
+    dergo(ClientSocket,message) 
+    try:
+        response = ClientSocket.recv(1024)
+        response = response.decode("UTF-8")
+        print (response)
+    except:
+        print ("Error: Serveri nuk ka kthyer pergjigje")
+    menu(ClientSocket)
+    
 def M1(ClientSocket):
     message = "M1 "
     message = message+str(input("Fjalia per tu Koduar: "))
