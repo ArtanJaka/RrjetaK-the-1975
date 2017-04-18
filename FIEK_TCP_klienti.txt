@@ -5,7 +5,30 @@ portS=9000
 Ip="localhost"
 print("-----Klienti FIEK-TCP-------")
 
-
+def ip(ClientSocket):
+    message = "IP "
+    message = message.encode("UTF-8")
+    dergo(ClientSocket,message) 
+    try:
+        response = ClientSocket.recv(1024)
+        response = response.decode("UTF-8")
+        print (response)
+    except:
+        print ("Error: Serveri nuk ka kthyer pergjigje")
+    menu(ClientSocket)
+    
+def port(ClientSocket):
+    message = "PORT "
+    message = message.encode("UTF-8")
+    dergo(ClientSocket,message) 
+    try:
+        response = ClientSocket.recv(1024)
+        response = response.decode("UTF-8")
+        print (response)
+    except:
+        print ("Error: Serveri nuk ka kthyer pergjigje")
+    menu(ClientSocket)
+    
 def zanore(ClientSocket):
     message = "ZANORE "
     message = message+input("Jepni nje fjali: ") 
@@ -19,6 +42,19 @@ def zanore(ClientSocket):
         print ("Error: Serveri nuk ka kthyer pergjigje")
     menu(ClientSocket)
 
+def printo(ClientSocket):
+    message = "PRINTO "
+    message = message+str(input("Mezashi: "))
+    message = message.encode("UTF-8")
+    dergo(ClientSocket,message) 
+    try:
+        response = ClientSocket.recv(1024)
+        response = response.decode("UTF-8")
+        print (response)
+    except:
+        print ("Error: Serveri nuk ka kthyer pergjigje")
+    menu(ClientSocket)
+    
 def time(ClientSocket):
     message = "TIME "
     message = message.encode("UTF-8")
