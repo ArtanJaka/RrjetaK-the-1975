@@ -11,32 +11,8 @@ ClientSocket.bind(('', port))
 ClientSocket.settimeout(5.0)
 
 print("-------------Klienti FIEK-UDP--------------")
-#ip = str(input('Server IP (localhost) : ')
-#portS = int(str(input('Server Port (9000): '))
 
-def ip():
-    message = "IP "
-    message = message.encode("UTF-8")
-    ClientSocket.sendto(message,(Ip,portS)) 
-    try:
-        response,addr = ClientSocket.recvfrom(1024)
-        response = response.decode("UTF-8")
-        print (response)
-    except:
-        print ("Error: Serveri nuk ka kthyer pergjigje")
-    menu()
-  
-def port():
-    message = "PORT "
-    message = message.encode("UTF-8")
-    ClientSocket.sendto(message,(Ip,portS)) 
-    try:
-        response,addr = ClientSocket.recvfrom(1024)
-        response = response.decode("UTF-8")
-        print (response)
-    except:
-        print ("Error: Serveri nuk ka kthyer pergjigje")
-    menu()
+
 
 def zanore():
     message = "ZANORE "    
@@ -51,30 +27,6 @@ def zanore():
         print ("Error: Serveri nu ka kthyer pergjigje")
     menu()
 
-def printo():
-    message = "PRINTO "
-    message = message.encode("UTF-8")
-    ClientSocket.sendto(message,(Ip,portS)) 
-    try:
-        response,addr = ClientSocket.recvfrom(1024)
-        response = response.decode("UTF-8")
-        print (response)
-    except:
-        print ("Error: Serveri nu ka kthyer pergjigje")
-    menu()
-
-def host():
-    message = "HOST "
-    message = message.encode("UTF-8")
-    ClientSocket.sendto(message,(Ip,portS)) 
-    try:
-        response,addr = ClientSocket.recvfrom(1024)
-        response = response.decode("UTF-8")
-        print (response)
-    except:
-        print ("Error: Serveri nuk ka kthyer pergjigje")
-    menu()
- 
 def time():
     message = "TIME "
     message = message.encode("UTF-8")
@@ -86,7 +38,6 @@ def time():
     except:
         print ("Error: Serveri nu ka kthyer pergjigje")
     menu()
-
 def keno():
     message = "KENO "
     message = message.encode("UTF-8")
@@ -98,7 +49,6 @@ def keno():
     except:
         print ("Error: Serveri nu ka kthyer pergjigje")
     menu()
-
 def faktoriel():
     message = "FAKTORIEL "
     fakt = str(input('Kerko faktorielin e numrit: '))
@@ -113,18 +63,6 @@ def faktoriel():
         print ("Error: Serveri nu ka kthyer pergjigje")
     menu()    
 
-def konverto():
-    message = "KONVERTO "
-    message = message.encode("UTF-8")
-    ClientSocket.sendto(message,(Ip,portS)) 
-    try:
-        response,addr = ClientSocket.recvfrom(1024)
-        response = response.decode("UTF-8")
-        print (response)
-    except:
-        print ("Error: Serveri nu ka kthyer pergjigje")
-    menu()
-
 def M1():
     message = "M1 "
     message = message+str(input("Fjalia per tu Koduar: "))
@@ -137,7 +75,6 @@ def M1():
     except:
         print ("Error: Serveri nu ka kthyer pergjigje")
     menu()
-
 def M2():
     message = "M2 "
     message = message+str(input("Numri i rreshtave h= "))
@@ -152,7 +89,6 @@ def M2():
     except:
         print ("Error: Serveri nu ka kthyer pergjigje")
     menu()
-    
 def M3():
     message = "M3 "
     message=message+str(input("Shkruani tekstin:"))
@@ -165,7 +101,6 @@ def M3():
     except:
         print ("Error: Serveri nu ka kthyer pergjigje")
     menu()
-
 def M4():
     message = "M4 "
     message=message+str(input("Jepni numrat(x y z ...):"))
@@ -178,7 +113,6 @@ def M4():
     except:
         print ("Error: Serveri nu ka kthyer pergjigje")
     menu()
-
 def M5():
     message = "M5 "
     message = message.encode("UTF-8")
@@ -190,7 +124,6 @@ def M5():
     except:
         print ("Error: Serveri nu ka kthyer pergjigje")
     menu()
-
 def M6():
     message = "M6 "
     message = message.encode("UTF-8")
@@ -202,7 +135,6 @@ def M6():
     except:
         print ("Error: Serveri nu ka kthyer pergjigje")
     menu()
-    
 def M7():
     message = "M7 "
     message = message.encode("UTF-8")
@@ -214,7 +146,6 @@ def M7():
     except:
         print ("Error: Serveri nu ka kthyer pergjigje")
     menu()
-
 def M8():
     message = "M8 "
     message = message.encode("UTF-8")
@@ -226,11 +157,9 @@ def M8():
     except:
         print ("Error: Serveri nu ka kthyer pergjigje")
     menu()
-    
 def end():
     ClientSocket.close()
     exit();
-    
 def freestyle():
     message = str(input("Request: "))
     message = message.encode("UTF-8")
@@ -242,7 +171,6 @@ def freestyle():
     except:
         print ("Error: Serveri nu ka kthyer pergjigje")
     menu()
-
 
 def menu():
     print (" ")
