@@ -1,20 +1,22 @@
 from socket import *
 import random
-import _thread
 import datetime
+portS=9000
 
-port=9000
+ServerSocket = socket(AF_INET, SOCK_DGRAM)
+ServerSocket.bind(('', portS))
 
-ServerSocket = socket(AF_INET, SOCK_STREAM)
-ServerSocket.bind(('', port))
-ServerSocket.listen(5)
-print('---------FIEK-TCP-Server-----------jemi online--------')
+print('-----FIEK-UDP server ---------jemi online-----')
+print('Kerkesat:')
 
-def Reply(request,connSocket,addr):
-    request = request.decode("UTF-8")
-    message = request.split(' ')
-    response = "  "  
-    print("Request: "+request)
+
+    
+while True:    
+    message,addr = ServerSocket.recvfrom(1024)
+    message = message.decode("UTF-8")
+    print ("Request:"+message)
+    message=message.split(' ')
+    response=""  
     
     if (message[0]=="TIME"):
         now=datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S %p")
@@ -28,7 +30,7 @@ def Reply(request,connSocket,addr):
             if message[i] in zanoret:
                 nrZan=nrZan+1;
         nrZan=nrZan-3
-        response="Numri i zanoreve ne tesktin e dhene eshte:"+str(nrZan)         
+        response="Numri i zanoreve ne tesktin e dhene eshte:"+str(nrZan)
     if (message[0]=="KENO"):
         response="Numrat e rastesishem 1-80: "
         for i in range(0, 20):
@@ -106,27 +108,5 @@ def Reply(request,connSocket,addr):
         response = "TBD"
     if (message[0]=="M8"):
         response = "TBD"
-    return response
-
-
-def Connection(connSocket,addr):
-    print("Lidhur me klientin: "+str(addr))
-    while 1:
-        try:      
-            request = connSocket.recv(4096)
-            print("Client:"+str(addr))
-            response = Reply(request,connSocket,addr)
-            response = response.encode("UTF-8")         
-            connSocket.send(response)
-        except:
-            print ("Lidhja me klientin :"+str(addr)+"u nderpre")
-            connSocket.close()            
-            break
-
-while True:    
-    try:
-        connSocket,addr = ServerSocket.accept()
-        _thread.start_new_thread ( Connection, (connSocket,addr) )
-    except:
-        print ("Nuk mund te  lidhemi me klient")
-
+    response=response.encode("UTF-8")
+    ServerSocket.sendto(response,("localhost",port))
