@@ -27,6 +27,12 @@ while True:
         response.remove("PRINTO")
         response = ' '.join(response)
         print (response)
+    if (message[0]=="HOST"):
+        try:
+            response = "Emri i HOST-it eshte: "
+            response = response+connSocket.gethostname()
+        except:
+            response = "Emri i Host-it nuk u zbulua."
     if(message[0]=="ZANORE"):
         zanoret="AEIOUYaeiouy"
         nrZan=0
@@ -55,6 +61,27 @@ while True:
             
         except ValueError:
             response= "Gabim ne formatin e Request"
+    if (message[0]=="KONVERTO"):
+        request=message
+        try:
+            if(request[1]=="CelciusToKelvin"):  
+                response = request[2]+" C = "+str(int(request[2])+273.15)+" K"
+            if(request[1]=="CelsiusToFahrenheit"):
+                response = request[2]+" C = "+str((int(request[2])*9/5)+32)+" F"
+            if(request[1]=="KelvinToFahrenheit"):
+                response = request[2]+" K = "+str((int(request[2])*9/5)+32+273.15)+" F"
+            if(request[1]=="KelvinToCelsius"):
+                response = request[2]+" K = "+str(int(request[2])-273.15)+" C"
+            if(request[1]=="FahrenheitToCelsius"):
+                response = request[2]+" F = "+str((int(request[2])-32)*5/9)+" C"
+            if(request[1]=="FahrenheitToKelvin"):
+                response = request[2]+" F = "+str(((int(request[2])-32)*5/9)+273.15)+" K"
+            if(request[1]=="PoundToKilogram"):
+                response = request[2]+" P = "+str(int(request[2])*0.4535)+" Kg"
+            if(request[1]=="KilogramToPound"):
+                response = request[2]+" Kg = "+str(int(request[2])/0.4535)+" P"
+        except:
+            response = "Formati i te dhenave eshte i gabuar"     
     if (message[0]=="M1"):
         message = " ".join(message) 
         message = message.encode("UTF-8")      
