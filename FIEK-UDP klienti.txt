@@ -12,7 +12,42 @@ ClientSocket.settimeout(5.0)
 
 print("-------------Klienti FIEK-UDP--------------")
 
+def ip():
+    message = "IP "
+    message = message.encode("UTF-8")
+    ClientSocket.sendto(message,(Ip,portS)) 
+    try:
+        response,addr = ClientSocket.recvfrom(1024)
+        response = response.decode("UTF-8")
+        print (response)
+    except:
+        print ("Error: Serveri nuk ka kthyer pergjigje")
+  menu()
 
+def port():
+    message = "PORT "
+    message = message.encode("UTF-8")
+   ClientSocket.sendto(message,(Ip,portS)) 
+    try:
+        response,addr = ClientSocket.recvfrom(1024)
+        response = response.decode("UTF-8")
+        print (response)
+    except:
+        print ("Error: Serveri nuk ka kthyer pergjigje")    
+  menu()
+
+def printo():
+    message = "PRINTO "
+    message = message+str(input("Mezashi: "))
+    message = message.encode("UTF-8")
+    ClientSocket.sendto(message,(Ip,portS)) 
+    try:
+        response,addr = ClientSocket.recvfrom(1024)
+        response = response.decode("UTF-8")
+        print (response)
+    except:
+        print ("Error: Serveri nu ka kthyer pergjigje")
+    menu()
 
 def zanore():
     message = "ZANORE "    
