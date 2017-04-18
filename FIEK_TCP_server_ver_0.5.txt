@@ -1,7 +1,7 @@
 from socket import *
 import random
 import _thread
-
+import datetime
 
 port=9000
 
@@ -10,18 +10,15 @@ ServerSocket.bind(('', port))
 ServerSocket.listen(5)
 print('---------FIEK-TCP-Server-----------jemi online--------')
 
-def Reply(request):
+def Reply(request,connSocket,addr):
     request = request.decode("UTF-8")
     message = request.split(' ')
     response = "  "  
     print("Request: "+request)
-    if (message[0]=="IP"):
-        print(" #Kodi per IP ")
-    #. qitu i shton tjerat
-
-    #.
-
-    #.
+    
+    if (message[0]=="TIME"):
+        now=datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S %p")
+        response="Koha ne kompjuterin e serverit eshte:"+str(now)
     if(message[0]=="ZANORE"):
         zanoret="AEIOUYaeiouy"
         nrZan=0
@@ -31,9 +28,7 @@ def Reply(request):
             if message[i] in zanoret:
                 nrZan=nrZan+1;
         nrZan=nrZan-3
-        response="Numri i zanoreve ne tesktin e dhene eshte:"+str(nrZan)                                                                     if (message[0]=="TIME"):
-        now=datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S %p")
-        response="Koha ne kompjuterin e serverit eshte:"+str(now)
+        response="Numri i zanoreve ne tesktin e dhene eshte:"+str(nrZan)         
     if (message[0]=="KENO"):
         response="Numrat e rastesishem 1-80: "
         for i in range(0, 20):
@@ -89,7 +84,6 @@ def Reply(request):
                 response = response + "\n"          
         except ValueError:
             response= "Gabim ne formatin e Request"
-    return response
     if  (message[0]=="M3"):
         message.remove("M3")
         message=" ".join(message)
@@ -97,19 +91,22 @@ def Reply(request):
         message=list(message)
         for i in range(0,len(message)):
              message1[len(message)-i-1]=message[i]
-        response ="Reversi i tekstit:" + "".join(message1) 
-            
+        response = "".join(message1) 
     if (message[0]=="M4"):
         max_num=message[1]
-        min_num=message[1]
-
         for i in range(1,len(message)):
             if  message[i]>max_num:
                 max_num=message[i]
-            elif message[i]<min_num:
-                min_num=message[i]
-
-        response="Numri maksimal i listes eshte:"+max_num+"\nNumri minimal i listes eshte:"+min_num
+        response="Numri maksimal i listes:"+max_num
+    if (message[0]=="M5"):
+        response = "TBD"
+    if (message[0]=="M6"):
+        response = "TBD"
+    if (message[0]=="M7"):
+        response = "TBD"
+    if (message[0]=="M8"):
+        response = "TBD"
+    return response
 
 
 def Connection(connSocket,addr):
@@ -118,7 +115,7 @@ def Connection(connSocket,addr):
         try:      
             request = connSocket.recv(4096)
             print("Client:"+str(addr))
-            response = Reply(request)
+            response = Reply(request,connSocket,addr)
             response = response.encode("UTF-8")         
             connSocket.send(response)
         except:
@@ -132,16 +129,4 @@ while True:
         _thread.start_new_thread ( Connection, (connSocket,addr) )
     except:
         print ("Nuk mund te  lidhemi me klient")
-
-
-            break
-
-
-
-while True:    
-    try:
-        connSocket,addr = ServerSocket.accept()
-        thread.start_new_thread ( Connection, (connSocket,addr) )
-    except:
-        continue
 
